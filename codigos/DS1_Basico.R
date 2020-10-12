@@ -1,25 +1,31 @@
 ################################################
-###  Uma Introdução à Ciência de dados no R  ###
-###              Filipe J. Zabala            ###
-###        www.estatisticaclassica.com       ###
-###           filipe.zabala@pucrs.br         ###
-###           2018-11-12 a 2018-11-21        ###
+###    Ciência de dados em software livre    ###
+###         http://filipezabala.com          ###
+###  https://github.com/filipezabala/cddesl  ###
+###            Início: 2020-10-11            ###
+###      Última atualização: 2020-10-12      ###
 ################################################
 
-### Referências
+### Textos
 # https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf
 # http://r4ds.had.co.nz/
-# http://www.estatisticaclassica.com
+# https://www.curso-r.com/
+# https://www.ufrgs.br/wiki-r
 # http://www.burns-stat.com/pages/Tutor/R_inferno.pdf
+# https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
+
+### Formulários e resumos
 # https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
 # https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
-# https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
-# https://www.r-graph-gallery.com/
-# https://www.shinyapps.org/apps/RGraphCompendium/index.php
-# https://www.curso-r.com/
-# https://www.ufrgs.br/wiki-r
 
+### Gráficos
+# https://plot.ly/r/
+# https://www.r-graph-gallery.com/
+# https://github.com/d3/d3/wiki/Gallery
+# http://kateto.net/network-visualization
+# https://www.shinyapps.org/apps/RGraphCompendium/index.php
+# http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
 ### Links para a instalação do R e RStudio
 # https://cloud.r-project.org/
@@ -41,6 +47,16 @@
 ##############################
 ### 1 Funções básicas do R ###
 ##############################
+
+# Executar comandos
+# Opção 1: clicar no botão 'Run'
+# Opção 2: Ctrl+Enter (Windows)
+#          command+return (Mac) 
+
+# Comentar/descomentar:
+# Ctrl+Shift+C (Windows)
+# command+shift+C (Mac)
+
 
 # Instalando os pacotes necessários (rodar uma vez)
 # No terminal, sudo rstudio
