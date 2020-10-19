@@ -74,7 +74,6 @@ library(pracma)       # nthroot(x,n)
 library(car)          # recode()
 library(rgl)          # demo(rgl)
 
-
 # Demonstração de algumas funcionalidades
 demo()              # Lista todos as demonstrações disponíveis, mesmo em pacotes não carregados
 demo(persp)         # Gráficos 3D
@@ -124,6 +123,7 @@ sqrt(16)        # Raiz quadrada
 sqrt(-17+0i)    # Raiz quadrada para os Complexos
 pracma::nthroot(16,2)   # {pracma} Raiz n-ésima (n=2)
 pracma::nthroot(16,4)   # {pracma} Raiz n-ésima (n=4)
+16^(1/4)        # podemos usar esta forma
 
 # Prioridade das operações (calcule mentalmente antes de rodar)
 1+2*5 
@@ -165,7 +165,7 @@ for(i in seq(1,10,2)) print(i)
 
 # celsius para farenheit
 for(celsius in 20:30){
-  print( c(celsius, round(1.8*celsius+32, 0)) )
+  print( c(celsius, round(1.8*celsius+32, 1)) )
 }
 
 # while
@@ -199,6 +199,7 @@ sum(c(T,F,F,T,T,T,T,F,T))
 ?Logic  # ajuda de 'Logical Operators'
 
 
+# Tipos de objetos
 # Fatores
 factor(letters[1:10])                           # os fatores são categorias
 
