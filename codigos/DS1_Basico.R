@@ -3,8 +3,11 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-12      ###
+###      Última atualização: 2020-10-19      ###
 ################################################
+
+# Playlist
+# https://www.youtube.com/playlist?list=PLgnUrXr7_7coSfm067nFXPvShO18o6GQ_
 
 ### Textos
 # https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf
