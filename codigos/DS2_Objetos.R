@@ -97,7 +97,8 @@ e1 <- vector()        # atribuindo um objeto 'vazio'
 e2 <- numeric()       # equivalente a 'vector()'
 e1[3] <- 17; e1       # o objeto assume a dimensão da posição fornecida
 e2[10] <- 10; e2
-
+length(e1)
+length(e2)
 
 # Matrizes
 (m1 <- cbind(x,y,z))    # Cola os vetores como colunas, transformando em uma matriz 10x3
@@ -143,14 +144,18 @@ l1
 is.list(l1)
 l1$matriz2    # $ para chamar pelo nome
 l1[[2]]       # [[ ]] para chamar pela posicao
+class(l1)
 class(l1$matriz2)
 diag(l1$matriz2)
 class(l1$char)
+lapply(l1, class)
 l1$char[1]
 names(l1)
 
+# listas como retorno de funções
 x <- rnorm(100)
 y <- rpois(100,4)
+plot(x,y)
 
 fit <- lm(y ~ x)
 names(fit)
@@ -162,7 +167,7 @@ fit$effects
 
 # Data frame
 # Lendo o arquivo 'hospital.txt' direto do link
-h <- read.table('http://www.filipezabala.com/data/hospital.txt', head=T)
+h <- read.table('http://www.filipezabala.com/data/hospital.txt', header=T)
 class(h)     # classe
 dim(h)       # dimensão
 head(h)      # cabeçalho, teste 'tail(hosp)'
@@ -171,6 +176,9 @@ str(h)       # estrutura (structure)
 
 h.matrix <- as.matrix(h)
 class(h.matrix)
+str(h.matrix)
+head(h.matrix)
+lapply(h.matrix, class)
 
 
 # Funções úteis
@@ -178,14 +186,14 @@ class(h.matrix)
 # Valores faltantes (NA/missing values)
 (z1 <- c(1:3, NA))    # NA é um símbolo especial
 (z2 <- c(1:3, NB))    # erro, pois 'NB' não é símbolo especial
-is.na(z1)
+sum(is.na(z1))
 mean(z1)
 mean(z1, na.rm = T)
 
 
 # Diretório de trabalho (working directory)
 getwd()        # Apresenta o diretório corrente
-setwd('H:/')   # Ajusta o diretório corrente
+setwd('~/')   # Ajusta o diretório corrente
 dir()          # Apresenta o conteúdo do diretório corrente
 
 (x <- 1:10)
