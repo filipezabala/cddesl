@@ -54,7 +54,7 @@
 #################################################################
 
 # Lendo o arquivo 'hospital.txt' direto do link, vide Zabala (2018a)
-h <- read.table('http://www.estatisticaclassica.com/data/hospital.txt', head = T)
+h <- read.table('http://www.filipezabala.com/data/hospital.txt', head = T)
 dim(h)
 head(h)   # teste tail(h, 10)
 attach(h) # cuidado ao usar attach! Veja ?detach
