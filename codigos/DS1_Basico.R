@@ -18,8 +18,7 @@
 # https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
 
 ### Formulários e resumos
-# https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
-# https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+# https://www.rstudio.com/resources/cheatsheets/
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
 
 ### Gráficos
@@ -176,20 +175,22 @@ options(digits = 9) # Ajusta apresentação para 9 dígitos (padrão é 7)
 for(i in 6:-2){print(round(153.456789,i))}
 
 # sprintf do C
-sprintf("%f", pi)
-sprintf("%.3f", pi)
-sprintf("%1.0f", pi)
-sprintf("%5.1f", pi)
-sprintf("%05.1f", pi)
-sprintf("%+f", pi)
-sprintf("% f", pi)
-sprintf("%-10f", pi) # left justified
-sprintf("%e", pi)
-sprintf("%E", pi)
-sprintf("%g", pi)
-sprintf("%g",   1e6 * pi) # -> exponential
-sprintf("%.9g", 1e6 * pi) # -> "fixed"
-sprintf("%G", 1e-6 * pi)
+sprintf('%f', pi)
+sprintf('%.3f', pi)
+sprintf('%.200f', pi)
+sprintf('%.5f', pi)
+sprintf('%1.0f', pi)
+sprintf('%5.1f', pi)
+sprintf('%05.1f', pi)
+sprintf('%+f', pi)
+sprintf('% f', pi)
+sprintf('%-10f', pi) # left justified
+sprintf('%e', pi)
+sprintf('%E', pi)
+sprintf('%g', pi)
+sprintf('%g',   1e6 * pi) # -> exponential
+sprintf('%.9g', 1e6 * pi) # -> 'fixed'
+sprintf('%G', 1e-6 * pi)
 
 # Valores lógicos
 2 < 5            # TRUE ou T
@@ -201,6 +202,6 @@ sprintf("%G", 1e-6 * pi)
 !(1==1)          # Negação simbolizada por !
 as.numeric(c(T,F,F,T,T,T,T,F,T))  # conversão para numérico
 sum(c(T,F,F,T,T,T,T,F,T))
-?Logic  # ajuda de 'Logical Operators'
+?base::Logic  # ajuda de 'Logical Operators'
 
 # =)

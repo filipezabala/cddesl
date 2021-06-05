@@ -18,8 +18,7 @@
 # https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
 
 ### Formulários e resumos
-# https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
-# https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+# https://www.rstudio.com/resources/cheatsheets/
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
 
 ### Gráficos
@@ -88,13 +87,14 @@ x
 
 (y = 4)
 (3 -> z)
+3 = z
 
 x+y*z
 
 # Vetores
 (v <- c(2,0,1,2,4,2))
 2*v
-v^2
+mean(v^2)
 v^3
 
 v[3]
@@ -109,7 +109,7 @@ library(MASS)
 fractions(0.5)
 fractions(0.25)
 
-# Texto
+# Texto 
 letters[1:20]
 LETTERS
 noquote(LETTERS)
