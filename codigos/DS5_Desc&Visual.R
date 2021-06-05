@@ -25,10 +25,14 @@
 ### Gráficos
 # https://plot.ly/r/
 # https://www.r-graph-gallery.com/
+# http://www.cookbook-r.com/Graphs/
+# https://exts.ggplot2.tidyverse.org/
 # https://github.com/d3/d3/wiki/Gallery
 # http://kateto.net/network-visualization
+# https://r4ds.had.co.nz/data-visualisation.html
 # https://www.shinyapps.org/apps/RGraphCompendium/index.php
 # http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
+# https://d3js.org/
 
 ### Links para a instalação do R e RStudio
 # https://cloud.r-project.org/
@@ -54,7 +58,7 @@
 #################################################################
 
 # Lendo o arquivo 'hospital.txt' direto do link, vide Zabala (2018a)
-h <- read.table('http://www.estatisticaclassica.com/data/hospital.txt', head = T)
+h <- read.table('http://www.filipezabala.com/data/hospital.txt', head = T)
 dim(h)
 head(h)   # teste tail(h, 10)
 attach(h) # cuidado ao usar attach! Veja ?detach
@@ -104,8 +108,9 @@ sapply(h, sd)
 
 # Instalando os pacotes necessários (rodar uma vez)
 # No terminal, sudo R
-# packs <- c('tidyverse','maps','nycflights13')
+# packs <- c('tidyverse','maps','nycflights13', 'devtools')
 # install.packages(packs, dep = T)
+# devtools::install_github('filipezabala/jurimetrics', force = T)
 # update.packages(ask = F)
 library(ggplot2)
 library(maps)
@@ -186,8 +191,8 @@ ggplot(economics) +
 
 
 # função de previsão
-source('~/../Downloads/fits.R')
-fits(economics$pce, graf = T)
+library(jurimetrics)
+fits(economics$pce, show.sec.graph = T)
 fits(economics$pop, graf = T)
 fits(economics$psavert, graf = T)
 fits(economics$uempmed, graf = T)
@@ -544,7 +549,7 @@ ggplot(data.frame(x=c(0, 10)), aes(x)) +
 
 
 # função completa
-install.packages('rgl',dep=T)
+# install.packages('rgl',dep=T)
 library(rgl)
 uber <- function(km,tempo){
   print(preco <- 2.3 + 1.2*km + .2*tempo)
