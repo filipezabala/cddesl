@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-19      ###
+###      Última atualização: 2021-06-05      ###
 ################################################
 
 # Playlist
@@ -34,19 +34,22 @@
 # https://cloud.r-project.org/
 # https://www.rstudio.com/products/rstudio/download/preview/
 
+### (R) tools
+# https://cran.r-project.org/bin/windows/Rtools/
+# https://cran.r-project.org/bin/macosx/tools/
 
 ### Tópicos
-# 0 A primeira seção de R e RStudio
-# 1 Funções básicas do R e RStudio  <-- 
-# 2 Objetos e funções úteis
-# 3 Criando e manipulando funções
-# 4 Manipulando dados com dplyr and tidyr
-# 5 Estatística	descritiva, visualização e séries temporais
-# 6 Probabilidade
-# 7 Inferência
-# 8 Tópicos em Modelos Lineares Generalizados
-# 9 Aprendizagem de máquina
-
+#  0 A primeira seção de R e RStudio
+#  1 Funções básicas do R e RStudio  <-- 
+#  2 Objetos e funções úteis
+#  3 Criando e manipulando funções
+#  4 Manipulando dados com dplyr and tidyr
+#  5 Estatística	descritiva, visualização e séries temporais
+#  6 Probabilidade
+#  7 Cadeias de Markov
+#  8 Inferência
+#  9 Tópicos em Modelos Lineares Generalizados
+# 10 Aprendizado de máquina
 
 
 ########################################
@@ -74,21 +77,17 @@ demo(colors)        # Cores por nome
 demo(Hershey)       # Tabelas de caracteres
 demo(plotmath)      # Notação matemática
 
-
 # Detalhes da distribuição
 licence()
 RShowDoc('COPYING') # GNU Version 2, June 1991
 RShowDoc('GPL-3')   # GNU Version 3, June 2007
 
-
 # Contribuidores
 contributors()
-
 
 # Citação
 citation()        # R
 citation('car')   # pacotes
-
 
 # Ajuda e documentação
 help()              # Ajuda
@@ -99,7 +98,6 @@ help.search('mean') # Busca por tópicos contendo 'mean'
 ??mean              # Equivalente a 'help.search('mean')'
 example(mean)       # Roda os exemplos da documentação de 'mean'
 apropos('mean')     # Encontra funções que contenham 'mean'
-
 
 ## Comandos básicos ##
 
@@ -177,6 +175,21 @@ for(i in 6:-2){print(round(153.456789,i))}
 options(digits = 9) # Ajusta apresentação para 9 dígitos (padrão é 7)
 for(i in 6:-2){print(round(153.456789,i))}
 
+# sprintf do C
+sprintf("%f", pi)
+sprintf("%.3f", pi)
+sprintf("%1.0f", pi)
+sprintf("%5.1f", pi)
+sprintf("%05.1f", pi)
+sprintf("%+f", pi)
+sprintf("% f", pi)
+sprintf("%-10f", pi) # left justified
+sprintf("%e", pi)
+sprintf("%E", pi)
+sprintf("%g", pi)
+sprintf("%g",   1e6 * pi) # -> exponential
+sprintf("%.9g", 1e6 * pi) # -> "fixed"
+sprintf("%G", 1e-6 * pi)
 
 # Valores lógicos
 2 < 5            # TRUE ou T

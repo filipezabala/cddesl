@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-19      ###
+###      Última atualização: 2021-06-05      ###
 ################################################
 
 # Playlist
@@ -34,18 +34,22 @@
 # https://cloud.r-project.org/
 # https://www.rstudio.com/products/rstudio/download/preview/
 
+### (R) tools
+# https://cran.r-project.org/bin/windows/Rtools/
+# https://cran.r-project.org/bin/macosx/tools/
 
 ### Tópicos
-# 0 A primeira seção de R e RStudio  <-- 
-# 1 Funções básicas do R e RStudio
-# 2 Objetos e funções úteis
-# 3 Criando e manipulando funções
-# 4 Manipulando dados com dplyr and tidyr
-# 5 Estatística	descritiva, visualização e séries temporais
-# 6 Probabilidade
-# 7 Inferência
-# 8 Tópicos em Modelos Lineares Generalizados
-# 9 Aprendizagem de máquina
+#  0 A primeira seção de R e RStudio  <-- 
+#  1 Funções básicas do R e RStudio
+#  2 Objetos e funções úteis
+#  3 Criando e manipulando funções
+#  4 Manipulando dados com dplyr and tidyr
+#  5 Estatística	descritiva, visualização e séries temporais
+#  6 Probabilidade
+#  7 Cadeias de Markov
+#  8 Inferência
+#  9 Tópicos em Modelos Lineares Generalizados
+# 10 Aprendizado de máquina
 
 
 
@@ -54,7 +58,7 @@
 #########################################
 
 
-# Executar comandos
+# Executar comandos da linha ou seleção
 # Opção 1: clicar no botão 'Run'
 # Opção 2: Ctrl+Enter (Windows)
 #          command+return (Mac) 
@@ -63,18 +67,20 @@
 # Ctrl+Shift+C (Windows)
 # command+shift+C (Mac)
 
-
+# Matemática básica
 2+4*3
 (2+4)*3
 2^3
-2**3
+2**3 # Python
 3^2
 
+# Sequências regulares
 1:10
 10:1
 -(10:1)
 -10:1
 
+# Atribuição
 x <- 2
 5*x
 x <- x+1
@@ -85,6 +91,7 @@ x
 
 x+y*z
 
+# Vetores
 (v <- c(2,0,1,2,4,2))
 2*v
 v^2
@@ -96,11 +103,13 @@ v[c(3,5)]
 length(v)
 ?length
 
+# Frações
 MASS::fractions(0.5)
 library(MASS)
 fractions(0.5)
 fractions(0.25)
 
+# Texto
 letters[1:20]
 LETTERS
 noquote(LETTERS)
