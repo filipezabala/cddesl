@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-20      ###
+###      Última atualização: 2021-06-05      ###
 ################################################
 
 # Playlist
@@ -18,8 +18,7 @@
 # https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
 
 ### Formulários e resumos
-# https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
-# https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+# https://www.rstudio.com/resources/cheatsheets/
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
 
 ### Gráficos
@@ -34,18 +33,22 @@
 # https://cloud.r-project.org/
 # https://www.rstudio.com/products/rstudio/download/preview/
 
+### (R) tools
+# https://cran.r-project.org/bin/windows/Rtools/
+# https://cran.r-project.org/bin/macosx/tools/
 
 ### Tópicos
-# 0 A primeira seção de R e RStudio
-# 1 Funções básicas do R e RStudio 
-# 2 Objetos e funções úteis <-- 
-# 3 Criando e manipulando funções
-# 4 Manipulando dados com dplyr and tidyr
-# 5 Estatística	descritiva, visualização e séries temporais
-# 6 Probabilidade
-# 7 Inferência
-# 8 Tópicos em Modelos Lineares Generalizados
-# 9 Aprendizagem de máquina
+#  0 A primeira seção de R e RStudio
+#  1 Funções básicas do R e RStudio
+#  2 Objetos e funções úteis  <-- 
+#  3 Criando e manipulando funções
+#  4 Manipulando dados com dplyr and tidyr
+#  5 Estatística	descritiva, visualização e séries temporais
+#  6 Probabilidade
+#  7 Cadeias de Markov
+#  8 Inferência
+#  9 Tópicos em Modelos Lineares Generalizados
+# 10 Aprendizado de máquina
 
 
 

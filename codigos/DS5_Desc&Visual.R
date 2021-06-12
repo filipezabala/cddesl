@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-20      ###
+###      Última atualização: 2021-06-12      ###
 ################################################
 
 # Playlist
@@ -18,38 +18,37 @@
 # https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
 
 ### Formulários e resumos
-# https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
-# https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+# https://www.rstudio.com/resources/cheatsheets/
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
 
 ### Gráficos
 # https://plot.ly/r/
 # https://www.r-graph-gallery.com/
-# http://www.cookbook-r.com/Graphs/
-# https://exts.ggplot2.tidyverse.org/
 # https://github.com/d3/d3/wiki/Gallery
 # http://kateto.net/network-visualization
-# https://r4ds.had.co.nz/data-visualisation.html
 # https://www.shinyapps.org/apps/RGraphCompendium/index.php
 # http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
-# https://d3js.org/
 
 ### Links para a instalação do R e RStudio
 # https://cloud.r-project.org/
 # https://www.rstudio.com/products/rstudio/download/preview/
 
+### (R) tools
+# https://cran.r-project.org/bin/windows/Rtools/
+# https://cran.r-project.org/bin/macosx/tools/
 
 ### Tópicos
-# 0 A primeira seção de R e RStudio
-# 1 Funções básicas do R e RStudio 
-# 2 Objetos e funções úteis
-# 3 Criando e manipulando funções
-# 4 Manipulando dados com dplyr and tidyr
-# 5 Estatística	descritiva, visualização e séries temporais <-- 
-# 6 Probabilidade
-# 7 Inferência
-# 8 Tópicos em Modelos Lineares Generalizados
-# 9 Aprendizagem de máquina
+#  0 A primeira seção de R e RStudio
+#  1 Funções básicas do R e RStudio
+#  2 Objetos e funções úteis
+#  3 Criando e manipulando funções
+#  4 Manipulando dados com dplyr and tidyr
+#  5 Estatística	descritiva, visualização e séries temporais  <-- 
+#  6 Probabilidade
+#  7 Cadeias de Markov
+#  8 Inferência
+#  9 Tópicos em Modelos Lineares Generalizados
+# 10 Aprendizado de máquina
 
 
 
@@ -58,7 +57,7 @@
 #################################################################
 
 # Lendo o arquivo 'hospital.txt' direto do link, vide Zabala (2018a)
-h <- read.table('http://www.filipezabala.com/data/hospital.txt', head = T)
+h <- read.table('http://www.filipezabala.com/data/hospital.txt', header = T)
 dim(h)
 head(h)   # teste tail(h, 10)
 attach(h) # cuidado ao usar attach! Veja ?detach
@@ -73,12 +72,20 @@ round(cumsum(rev(tab))/length(filhos),2)  # Frequência acumulada relativa inver
 
 
 # Comparando Sturges, Scott e Freedman-Diaconis, Exemplo 2.19
+barplot(table(altura))
 NC <- function(x) c(i = i, n = 10^i,                 # Quantidades simuladas
                     Sturges = nclass.Sturges(x),     # Sturges (1926)
                     Scott = nclass.scott(x),         # Scott (1979)
                     FD = nclass.FD(x))               # Freedman-Diaconis (1981)
 for(i in 1:6){set.seed(i); print(NC(rnorm(10^i)))}   # Pode ser demorado para i>6
 
+# histograma
+hist(altura)
+hist(altura, breaks = 'Scott')
+hist(altura, breaks = 'FD')
+hist(altura, prob=T)
+curve(dnorm(x, mean=mean(altura), sd=sd(altura)), 
+      1.4, 1.9, add=T, col = 'red')
 
 # Variável contínua - Exemplo 2.21
 pretty(nclass.Sturges(altura))            # Valores 'bonitos' para o número de classes

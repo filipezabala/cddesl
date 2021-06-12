@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-20      ###
+###      Última atualização: 2021-06-12      ###
 ################################################
 
 # Playlist
@@ -18,8 +18,7 @@
 # https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
 
 ### Formulários e resumos
-# https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
-# https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+# https://www.rstudio.com/resources/cheatsheets/
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
 
 ### Gráficos
@@ -34,26 +33,30 @@
 # https://cloud.r-project.org/
 # https://www.rstudio.com/products/rstudio/download/preview/
 
+### (R) tools
+# https://cran.r-project.org/bin/windows/Rtools/
+# https://cran.r-project.org/bin/macosx/tools/
 
 ### Tópicos
-# 0 A primeira seção de R e RStudio
-# 1 Funções básicas do R e RStudio 
-# 2 Objetos e funções úteis
-# 3 Criando e manipulando funções
-# 4 Manipulando dados com dplyr and tidyr <-- 
-# 5 Estatística	descritiva, visualização e séries temporais
-# 6 Probabilidade
-# 7 Inferência
-# 8 Tópicos em Modelos Lineares Generalizados
-# 9 Aprendizagem de máquina
+#  0 A primeira seção de R e RStudio
+#  1 Funções básicas do R e RStudio
+#  2 Objetos e funções úteis
+#  3 Criando e manipulando funções
+#  4 Manipulando dados com dplyr and tidyr  <-- 
+#  5 Estatística	descritiva, visualização e séries temporais
+#  6 Probabilidade
+#  7 Cadeias de Markov
+#  8 Inferência
+#  9 Tópicos em Modelos Lineares Generalizados
+# 10 Aprendizado de máquina
 
 
 
 ###############################################
 ### 4 Manipulando dados com dplyr and tidyr ###
 ###############################################
-packs <- c('tidyverse','nycflights13')
-install.packages(packs,dep=T)
+# packs <- c('tidyverse','nycflights13')
+# install.packages(packs,dep=T)
 
 library(tidyverse)
 library(nycflights13)
@@ -81,15 +84,21 @@ microbenchmark::microbenchmark(
 
 
 # imprimindo na tela (printing)
+dim(volcano)
+volcano
 head(volcano)
 class(volcano)
-as_tibble(volcano)
+(vt = as_tibble(volcano))
 tbl_df(volcano)    # equivale a as_tibble
 
+# imprimir todas as linhas (n = Inf) e colunas (width = Inf)
+vt %>% 
+  print(n = Inf, width = Inf)
 
 
 # obtendo subgrupos (subsetting)
 df1 <- data.frame(x = 1:3, y = 3:1)
+class(df1)
 length(df1)  # em data.frame a função length() retorna o número de colunas
 ncol(df1)
 dim(df1)
@@ -141,6 +150,8 @@ tb <- tibble(
   `2000` = 'number'
 )
 tb
+tb$`2000`
+tb$` `
 
 
 # tribble: 'tr'ansposed tibble
@@ -162,6 +173,7 @@ iris %>% head
 
 # pode-se ajustar apenas os parâmetros da função
 iris %>% head(10)
+iris[,-5] %>% colMeans()
 
 # criando dois vetores e calculando a distância euclidiana entre eles
 x1 <- 1:5; x2 <- 2:6
@@ -188,6 +200,8 @@ set.seed(1); aa <- sample(1:10); paste0(aa, LETTERS[aa])
 # mutate(), transmute()
 # summarise()
 # sample_n(), sample_frac()
+
+# https://vita.had.co.nz/papers/tidy-data.pdf
 
 library(nycflights13)
 flights
@@ -219,6 +233,7 @@ flights[1:11,]
 arrange(flights, year, month, day)
 flights %>% arrange(year, month, day)
 arrange(flights, desc(arr_delay))
+arrange(flights, year, desc(month), day)
 
 # base R
 flights[order(flights$year, flights$month, flights$day), ]
