@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-20      ###
+###      Última atualização: 2021-06-12      ###
 ################################################
 
 # Playlist
@@ -54,7 +54,7 @@
 #######################################
 
 # elevar ao quadrado
-quad <- function(x){
+quad = function(x){
   return(x**2)
 } 
 
@@ -74,6 +74,7 @@ bhaskara <- function(a,b,c)
   cat('Soma das raízes (-b/a) = ', -b/a, '\n')
   cat('Produto das raízes (c/a) = ', c/a, '\n')
 }
+args(bhaskara)
 bhaskara(1,-1,-2)
 # Exercício: generalize a função para admir raízes complexas.
 
@@ -85,7 +86,9 @@ central <- function(x, type = 'mean') {
          median = median(x),
          trimmed = mean(x, trim = .1))
 }
+set.seed(1)
 x <- rnorm(10)
+x
 
 central(x)
 central(x, 'mean')
@@ -96,22 +99,29 @@ central(x, 'trimmed')
 # exemplos de assign
 assign('nome',3)
 nome
+nome = 3 # equivalente
+
+# paste0('nome', 1)
+# nome1 = 1^2
 
 for(i in 1:4){
   assign(paste0('nome',i),i^2)
 }
 
-(a <- 1:4)
+(a <- 4:1)
 assign('a[1]', 2)
 a[1] == 2          # FALSE
 get('a[1]') == 2   # TRUE
+
+# colocar lista de nomes especiais do R!
+# https://cran.r-project.org/doc/manuals/R-lang.pdf, p. 48 (53 pdf)
 
 
 # variáveis globais, <<-
 # exemplo de 'The R Inferno', pg. 35
 x <- 1
 y <- 2
-fun <- function() {
+fun <- function(){
   x <- 101
   y <<- 102
 }
@@ -138,6 +148,29 @@ y
 # lapply retorna uma lista do mesmo tamanho de X, cada elemento é o resultado 
 # da aplicação de FUN ao elemento correspondente de X.
 # https://www.datacamp.com/community/tutorials/r-tutorial-apply-family
+
+(X = matrix(1:20, nrow = 4, byrow = T))
+colnames(X) = paste0('V', 1:ncol(X))
+X
+
+# for
+for(i in 1:ncol(X)){
+  print(sum(X[,i]))
+}
+
+# colSums
+colSums(X)
+
+# apply
+apply(X, 2, sum)
+
+# lapply
+class(X)
+class(as.data.frame(X))
+lapply(as.data.frame(X), sum)
+sapply(as.data.frame(X), sum)
+
+# Exercício: rodar e entender
 args(lapply)   # retorna apenas os argumentos da função. Tente apenas 'lapply'
 head(iris)
 class(iris)
@@ -177,12 +210,18 @@ xlis
 c(xlis, C=6:5)
 c(xlis, list(C=6:5))
 
+# NA
+# Not Available
+# Not Applicable
+# Not Annouced
+
 
 # passando argumentos
 args(apply)
 (myMat <- matrix(1:15, c(5,3)))
 myMat[5,1] <- NA
 myMat
+sum(is.na(myMat))
 apply(myMat, 1, mean)  # 1 indica aplicação da função mean() por linha
 apply(myMat, 2, mean)  # 2 indica aplicação da função mean() por coluna
 
@@ -259,6 +298,9 @@ uber(7,15)
 uber(0:10,0:10)
 ueg <- uber(expand.grid(0:10, 0:10), expand.grid(0:10, 0:10))
 rgl::plot3d(ueg)
+
+# 4. Ler:
+# http://adv-r.had.co.nz/Style.html
 
 
 # =)
