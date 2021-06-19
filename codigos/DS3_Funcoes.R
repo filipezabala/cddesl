@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2021-06-12      ###
+###      Última atualização: 2021-06-18      ###
 ################################################
 
 # Playlist

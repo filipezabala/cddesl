@@ -84,8 +84,7 @@ hist(altura)
 hist(altura, breaks = 'Scott')
 hist(altura, breaks = 'FD')
 hist(altura, prob=T)
-curve(dnorm(x, mean=mean(altura), sd=sd(altura)), 
-      1.4, 1.9, add=T, col = 'red')
+curve(dnorm(x, mean=mean(altura), sd=sd(altura)), 1.4, 1.9, add=T, col = 'red')
 
 # Variável contínua - Exemplo 2.21
 pretty(nclass.Sturges(altura))            # Valores 'bonitos' para o número de classes
@@ -200,11 +199,11 @@ ggplot(economics) +
 # função de previsão
 library(jurimetrics)
 fits(economics$pce, show.sec.graph = T)
-fits(economics$pop, graf = T)
-fits(economics$psavert, graf = T)
-fits(economics$uempmed, graf = T)
-fits(economics$unemploy, graf = T)
-fits(economics$unemploy/economics$pop, graf = T)
+fits(economics$pop, show.sec.graph = T)
+fits(economics$psavert, show.sec.graph = T)
+fits(economics$uempmed, .9, show.sec.graph = T)
+fits(economics$unemploy, .9, show.sec.graph = T)
+fits(economics$unemploy/economics$pop, show.sec.graph = T)
 
 
 
@@ -436,7 +435,7 @@ ggplot(mi_counties, aes(lon, lat)) +
 
 # metadados em mapas
 mi_census <- midwest %>%
-  tbl_df() %>%
+  tibble::as_tibble() %>%
   filter(state == 'MI') %>%
   mutate(county = tolower(county)) %>%
   select(county, area, poptotal, percwhite, percblack)
@@ -519,10 +518,12 @@ ggplot(delay, aes(dist, delay)) +
 
 # 1. Leia o artigo http://flowingdata.com/2015/09/23/years-you-have-left-to-live-probably/
 
-# 2. O UBER cobra um preço base de R$ 2.30, R$ 1.20 por km rodado e R$ 0.20 por minuto 
-# decorrido durante a viagem. a) Crie um gráfico de dispersão univariado com km por preço, 
-# e depois outro cruzando tempo com preço. b) Crie um gráfico 3D com as três informações. Use
-# as funções persp e rgl::plot3d.
+# 2. No início das suas atividades, a UBER cobrava um preço base de R$ 2.30, 
+# R$ 1.20 por km rodado e R$ 0.20 por minuto decorrido durante a viagem. 
+# a) Crie um gráfico de dispersão univariado com km por preço, 
+# e depois outro cruzando tempo com preço. 
+# b) Crie um gráfico 3D com as três informações. 
+# Use as funções persp e rgl::plot3d.
 
 # 2a
 fkm <- function(km){
