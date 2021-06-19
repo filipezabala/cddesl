@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2021-06-12      ###
+###      Última atualização: 2021-06-19      ###
 ################################################
 
 # Playlist
@@ -132,11 +132,12 @@ library(dplyr)
 
 
 # gráfico básico, primeiras duas posições de aes são x e y
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point()
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  jurimetrics::theme_doj()
 
-# base R
-plot(mpg$displ, mpg$hwy)
+# base R (cilindrada x rendimento)
+plot(mpg$displ, mpg$hwy, col= 'red')
 
 
 # colorindo por classe
@@ -196,9 +197,12 @@ ggplot(economics) +
   geom_line(aes(date, unemploy)) + scale_fill_manual(values = c('blue', 'red'))
 
 
+# 
 # função de previsão
 library(jurimetrics)
+?fits
 fits(economics$pce, show.sec.graph = T)
+fits(economics$pce, .9, show.sec.graph = T)
 fits(economics$pop, show.sec.graph = T)
 fits(economics$psavert, show.sec.graph = T)
 fits(economics$uempmed, .9, show.sec.graph = T)
