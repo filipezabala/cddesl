@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-20      ###
+###      Última atualização: 2021-06-23      ###
 ################################################
 
 # Playlist
@@ -18,8 +18,7 @@
 # https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
 
 ### Formulários e resumos
-# https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
-# https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+# https://www.rstudio.com/resources/cheatsheets/
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
 
 ### Gráficos
@@ -34,36 +33,40 @@
 # https://cloud.r-project.org/
 # https://www.rstudio.com/products/rstudio/download/preview/
 
+### (R) tools
+# https://cran.r-project.org/bin/windows/Rtools/
+# https://cran.r-project.org/bin/macosx/tools/
 
 ### Tópicos
-# 0 A primeira seção de R e RStudio
-# 1 Funções básicas do R e RStudio 
-# 2 Objetos e funções úteis
-# 3 Criando e manipulando funções
-# 4 Manipulando dados com dplyr and tidyr
-# 5 Estatística	descritiva, visualização e séries temporais
-# 6 Probabilidade
-# 7 Inferência
-# 8 Tópicos em Modelos Lineares Generalizados  <-- 
-# 9 Aprendizagem de máquina
+#  0 A primeira seção de R e RStudio
+#  1 Funções básicas do R e RStudio
+#  2 Objetos e funções úteis
+#  3 Criando e manipulando funções
+#  4 Manipulando dados com dplyr and tidyr
+#  5 Estatística	descritiva, visualização e séries temporais
+#  6 Probabilidade
+#  7 Cadeias de Markov
+#  8 Simulação
+#  9 Inferência
+# 10 Tópicos em Modelos Lineares Generalizados  <-- 
+# 11 Aprendizado de máquina
 
 
 
-###################################################
-### 8 Tópicos em Modelos Lineares Generalizados ###
-###################################################
+####################################################
+### 10 Tópicos em Modelos Lineares Generalizados ###
+####################################################
 
 
 ###
-## 7.1 modelo de regressao linear simples, lm() com uma unica variavel x
+## Modelo de regressao linear simples, lm() com uma unica variavel x
 #
 
+
+
 # Lendo dados
-x <- read.table('http://www.estatisticaclassica.com/data/drinks.txt',
-                head=T)
+x <- read.table('http://www.filipezabala.com/data/drinks.txt', header = T)
 head(x)
-x <- as_tibble(x)
-x
 attach(x)
 temp
 
@@ -129,7 +132,7 @@ predict(fit4, newdata, interval='predict')
 
 
 ###
-## 7.2 modelo de regressao linear multipla, lm() com multiplas variaveis x
+## Modelo de regressao linear multipla, lm() com multiplas variaveis x
 # Altman (1991) - Practical Statistics for Medical Research, Tabela 12.11, Chapman & Hall.
 # https://books.google.com.br/books?hl=en&lr=&id=v-walRnRxWQC&oi=fnd&pg=PR11&dq=Altman+(1991)+-+Practical+Statistics+for+Medical+Research&ots=SxYVFfuo1f&sig=eU6mb7FCjnexAzfzhdS4YVR6StU#v=onepage&q=o'neill&f=false
 
@@ -169,7 +172,7 @@ predict(fit3, newdata2, interval='predict')
 
 
 ###
-## 7.3 regressão logística bivariada
+## Regressão logística bivariada
 # https://mathdept.iut.ac.ir/sites/mathdept.iut.ac.ir/files/AGRESTI.PDF
 # https://www.ime.usp.br/~giapaula/texto_2013.pdf
 # http://www.utstat.toronto.edu/~brunner/oldclass/2201s11/readings/glmbook.pdf
@@ -205,7 +208,7 @@ exp(sum(coef(fit1)))/(1+exp(sum(coef(fit1))))
 
 
 ###
-## 7.4 Modelo Poisson
+## Modelo Poisson
 #
 
 x <- read.table('http://www.estatisticaclassica.com/data/fraturas.dat',

@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2021-06-18      ###
+###      Última atualização: 2021-06-23      ###
 ################################################
 
 # Playlist
@@ -46,9 +46,12 @@
 #  5 Estatística	descritiva, visualização e séries temporais
 #  6 Probabilidade
 #  7 Cadeias de Markov  <-- 
-#  8 Inferência
-#  9 Tópicos em Modelos Lineares Generalizados
-# 10 Aprendizado de máquina
+#  8 Simulação
+#  9 Inferência
+# 10 Tópicos em Modelos Lineares Generalizados
+# 11 Aprendizado de máquina
+
+
 
 
 ###########################

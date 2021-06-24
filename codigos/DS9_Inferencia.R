@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2020-10-20      ###
+###      Última atualização: 2021-06-23      ###
 ################################################
 
 # Playlist
@@ -18,8 +18,7 @@
 # https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/
 
 ### Formulários e resumos
-# https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
-# https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+# https://www.rstudio.com/resources/cheatsheets/
 # https://www.causascientia.org/math_stat/Dists/Compendium.pdf
 
 ### Gráficos
@@ -34,23 +33,37 @@
 # https://cloud.r-project.org/
 # https://www.rstudio.com/products/rstudio/download/preview/
 
+### (R) tools
+# https://cran.r-project.org/bin/windows/Rtools/
+# https://cran.r-project.org/bin/macosx/tools/
 
 ### Tópicos
-# 0 A primeira seção de R e RStudio
-# 1 Funções básicas do R e RStudio 
-# 2 Objetos e funções úteis
-# 3 Criando e manipulando funções
-# 4 Manipulando dados com dplyr and tidyr
-# 5 Estatística	descritiva, visualização e séries temporais
-# 6 Probabilidade
-# 7 Inferência  <-- 
-# 8 Tópicos em Modelos Lineares Generalizados
-# 9 Aprendizagem de máquina
+#  0 A primeira seção de R e RStudio
+#  1 Funções básicas do R e RStudio
+#  2 Objetos e funções úteis
+#  3 Criando e manipulando funções
+#  4 Manipulando dados com dplyr and tidyr
+#  5 Estatística	descritiva, visualização e séries temporais
+#  6 Probabilidade
+#  7 Cadeias de Markov
+#  8 Simulação
+#  9 Inferência  <-- 
+# 10 Tópicos em Modelos Lineares Generalizados
+# 11 Aprendizado de máquina
 
 
 ####################
-### 7 Inferência ###
+### 9 Inferência ###
 ####################
+
+##
+# Estimação pontual - não viés
+# Exemplo 5.3 e 4.19 (http://filipezabala.com/enrs/amostragem-1.html#exm:aasc)
+X <- c(24,32,49)
+mean(X)
+mxc <- c(24.0,28.0,36.5,28.0,32.0,40.5,36.5,40.5,49.0)
+mean(mxc)
+
 
 ##
 # Intervalos de confiança (frequentistas) assintóticos
@@ -68,15 +81,14 @@ z <- abs(qnorm(0.025))
 # Intervalos de confiança (frequentistas) via simulação
 # https://projecteuclid.org/download/pdf_1/euclid.aos/1176344552
 
-dr <- read.table('http://www.estatisticaclassica.com/data/drinks.txt',
-                 head=T)
+dr <- read.table('http://www.filipezabala.com/data/drinks.txt',
+                 header = T)
 head(dr)
 dim(dr)
 
 x <- dr$temp
 n <- nrow(dr)
-nboot <- 10
-nSims <- 1000 # numero de simulaçoes
+B <- 1000 # numero de simulaçoes
 
 # média teoria
 (z <- qnorm(.025))
@@ -86,30 +98,38 @@ cat(mean(x)+z*sd(x)/sqrt(n), mean(x)-z*sd(x)/sqrt(n))
 cat(mean(x)+t*sd(x)/sqrt(n), mean(x)-t*sd(x)/sqrt(n))
 
 # média via simulação (bootstrap)
-mu <- rep(NA, nSims) # empty vector to store means
-for(i in 1:nSims){
-  mu[i] <- mean(sample(x, size = nboot, replace=TRUE))
+mu <- rep(NA, B) # empty vector to store means
+for(i in 1:B){
+  mu[i] <- mean(sample(x, size = n, replace=TRUE))
 }
 quantile(mu,c(0.025,0.975))
 mean(x)
 
 # variância teoria
-(n-1)*var(x)/qchisq(0.975, n-1)
-(n-1)*var(x)/qchisq(0.025, n-1)
+cat((n-1)*var(x)/qchisq(0.975, n-1), 
+    (n-1)*var(x)/qchisq(0.025, n-1))
 
 # variância simulação
-v <- rep(NA, nSims) # empty vector to store medians
-for (i in 1:nSims){  
-  v[i] <- var(sample(x, size = nboot, replace=TRUE))
+v <- rep(NA, B) # empty vector to store medians
+for (i in 1:B){  
+  v[i] <- var(sample(x, size = n, replace=TRUE))
 }
 quantile(v,c(0.025,0.975))
 var(x)
+
+# https://math.stackexchange.com/questions/2384639/bootstrap-confidence-interval-in-r-using-replicate-and-quantile?newreg=46ec8b2e55b84b25a3c1c78802c1903c
+B = 10^4;  r = numeric(B)
+for(i in 1:B) {
+  s.re = sd(sample(x,n,repl=T))
+  r[i] = s.re/s }
+L.re = quantile(r, .025);  U.re = quantile(r, .975)
+c(s/U.re, s/L.re)  
 
 
 # mediana via simulação
 me <- rep(NA, nSims) # empty vector to store medians
 for (i in 1:nSims){  
-  me[i] <- median(sample(x, size = nboot, replace=TRUE))
+  me[i] <- median(sample(x, size = n, replace=TRUE))
 }
 quantile(me,c(0.025,0.975))
 median(x)
@@ -167,6 +187,7 @@ simul <- rbeta(nSims,a1,b1)
 (m <- mean(simul))
 (v <- var(simul))
 quantile(simul,c(0.025,0.975))
+
 
 # 1. Programar um simulador da função beta que utilize a fdp de beta e runif.
 
