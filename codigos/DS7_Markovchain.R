@@ -65,10 +65,10 @@
              nrow = 3, byrow = TRUE))
 rownames(P) <- colnames(P) <- LETTERS[1:nrow(P)]
 P
-(v1 <- t(v0)%*%P)
-(v2 <- v1%*%P)
-(P2 <- P%*%P)
-t(v0)%*%P2
+(v1 <- t(v0) %*% P)
+(v2 <- v1 %*% P)
+(P2 <- P %*% P)
+t(v0) %*% P2
 
 
 # Exemplo 2. A short example
@@ -92,7 +92,7 @@ x2[3]
 
 
 # Exercício 1
-# Crie uma função que encontre a distribuição estacionária
+# Crie uma função que encontre a distribuição estacionária (steady state)
 # em função de x0, P e do erro, apresentando o # iterações e 
 # o vetor de erros.
 # Aplique para o exemplo acima com e=0.01.
@@ -112,11 +112,11 @@ estac <- function(x0,P,e){
   return(list(i=i,erro=erro,z=z,Pn=Pn))
 }
 
-
 x0 <- c(0,1,0)
 (P <- matrix(c(.5,.2,.3, .15,.45,.4, .25,.35,.4),
              nrow = 3, byrow = TRUE))
 rownames(P) <- colnames(P) <- LETTERS[1:nrow(P)]
+P
 e <- 0.01
 
 estac(x0,P,e)
@@ -148,6 +148,7 @@ P60
 # Exemplo 5. Wheather (6.11 Stewart)
 P <- matrix(c(.7,.3, .4,.6), byrow = T, nrow = 2)
 colnames(P) <- rownames(P) <- c('sunny','rainy')
+P
 ss <- diag(2)
 m <- 400
 for(i in 1:m){
@@ -168,10 +169,14 @@ ss
 library(markovchain)
 
 
+(P <- matrix(c(.5,.2,.3, .15,.45,.4, .25,.35,.4),
+             nrow = 3, byrow = TRUE))
+
 # transformando P em 'markovchain'
 Pmc <- new('markovchain', transitionMatrix = P,
            states = LETTERS[1:ncol(P)],
            name='MarkovChain P')
+class(Pmc)
 Pmc
 
 # gráfico
@@ -184,11 +189,11 @@ initialState <- c(0,1,0)
 steps <- 4
 finalState <- initialState*Pmc^steps # using power operator
 finalState
-estac(x0,P,e=0.01)$z
-estac(x0,P,e=0.01)$i
+estac(initialState,P,e=0.01)$z
+estac(initialState,P,e=0.01)$i
 
 steadyStates(Pmc) # S4 method
-estac(x0,P,e=0.0001)
+stac(initialState,P,e=0.0001)
 
 
 # advanced example

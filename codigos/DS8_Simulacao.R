@@ -58,6 +58,9 @@
 
 ## Método da transformação inversa
 
+curve(dnorm(x), -3,3)
+curve(pnorm(x), -3,3)
+
 # Teorema da Transformação Integral de Probabilidade (Kotz et al (2005), p. 6476)
 # Se uma variável aleatória X tem uma função de distribuição contínua 
 # F(x), então a variável aleatória U = F(X) tem uma distribuição uniforme 
@@ -69,7 +72,7 @@
 
 
 # Distribuição exponencial
-# (adaptado de http://www.leg.ufpr.br/~walmes/ensino/ce089-2015-02/aula03_tip-2015-02.html)
+# (adaptado de http://www.leg.ufpr.br/~walmes/ensino/ce089-2015-02/aula03_tip-2015-02.html )
 Fx <- function(x, lambda){
   1-exp(-lambda*x)
 }
@@ -93,6 +96,7 @@ hist(x, probability = T)
 curve(l*exp(-l*x), add = T, col = 'red')
 rug(x)
 hist(rexp(n, l), probability = T) # função stats::rexp
+curve(l*exp(-l*x), add = T, col = 'red')
 
 # densidade
 plot(density(x, from = 0))
@@ -114,8 +118,8 @@ abline(a = 0, b = 1, col = 'red')
 
 # Exercício. Considere a função f(x) = 2x/9, 0 < x < 3.
 # a. Verifique se f(x) é uma função densidade de probabilidade.
-# b. Encontre F(x).
-# c. Simule F^{-1}(x) pelo método da da transformação inversa.
+# b. Encontre F(x). R. F(x) = x^2/9
+# c. Simule F(x) pelo método da da transformação inversa.
 
 
 ## Método da rejeição

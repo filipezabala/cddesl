@@ -64,18 +64,24 @@ pnorm(0)
 qnorm(0.025)
 
 # Gráficos
-library(ggplot2)
 rn <- rnorm(1000)
 hn <- hist(rn, breaks = 'FD', freq = F)
 curve(dnorm(x), add = T, col = 'blue')
 lines(density(rn), col = 'red')
 
-# dataset:
-data <- data.frame(value=rnorm(10000))
+# dataset
+set.seed(10); (data <- data.frame(value = rnorm(10000)))
+
+# máximo valor (inteiro) admitido por set.seed
+.Machine$integer.max
 
 # Usando ggplot2
-p1 <- ggplot(data, aes(x=value)) + geom_histogram() + geom_density(aes(y=..density..*10))
-p2 <- ggplot(data, aes(x=value)) + geom_histogram(binwidth = 0.05)
+library(ggplot2)
+p1 <- ggplot(data, aes(x=value)) + 
+  geom_histogram() + 
+  geom_density(aes(y=..density..*10))
+p2 <- ggplot(data, aes(x=value)) + 
+  geom_histogram(binwidth = 0.05)
 gridExtra::grid.arrange(p1,p2)
 
 ## TCL
