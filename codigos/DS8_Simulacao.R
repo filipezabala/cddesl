@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2021-06-24      ###
+###      Última atualização: 2021-06-26      ###
 ################################################
 
 # Playlist
@@ -58,16 +58,17 @@
 
 ## Método da transformação inversa
 
-# 1. Gere n números aleatórios de uma U(0,1)
-# 2. Aplique os n números em F^{-1}, a inversa da função F desejada
-# 3. Calcule F^{-1}(u)
-
 # Teorema da Transformação Integral de Probabilidade (Kotz et al (2005), p. 6476)
 # Se uma variável aleatória X tem uma função de distribuição contínua 
 # F(x), então a variável aleatória U = F(X) tem uma distribuição uniforme 
 # no intervalo (0,1), ou seja, é uma variável aleatória U(0,1).
 
-# Exponencial
+# 1. Gere n números (pseudo-)aleatórios de uma U(0,1)
+# 2. Aplique os n números em F^{-1}, a inversa da função F desejada
+# 3. Calcule F^{-1}(u)
+
+
+# Distribuição exponencial
 # (adaptado de http://www.leg.ufpr.br/~walmes/ensino/ce089-2015-02/aula03_tip-2015-02.html)
 Fx <- function(x, lambda){
   1-exp(-lambda*x)
@@ -107,8 +108,8 @@ Pobs <- (1:length(x))/length(x) # Freq. rel. acum. observadas.
 Pteo <- Fx(sort(x), lambda = l) # Prob acum. teóricas.
 
 plot(Pobs ~ Pteo, pch = '.',
-     xlab = "Frequências relativas acumuladas teóricas",
-     ylab = "Probabilidades acumuladas observadas")
+     xlab = 'Frequências relativas acumuladas teóricas',
+     ylab = 'Probabilidades acumuladas observadas')
 abline(a = 0, b = 1, col = 'red')
 
 # Exercício. Considere a função f(x) = 2x/9, 0 < x < 3.
@@ -118,4 +119,54 @@ abline(a = 0, b = 1, col = 'red')
 
 
 ## Método da rejeição
+
+# 1. Retire uma amostra de um ponto no eixo x da distribuição da proposta.
+# 2. Desenhe uma linha vertical nesta posição x, até o valor y máximo da função de densidade de probabilidade da distribuição da proposta.
+# 3. Faça a amostragem uniformemente ao longo desta linha de 0 ao máximo da função de densidade de probabilidade. Se o valor amostrado for maior que o valor da distribuição desejada nesta linha vertical, rejeite o valor x e volte para a etapa 1; caso contrário, o valor x é uma amostra da distribuição desejada.
+
+
+# Adaptado de Esteves, Izbicki & Stern (2020-01-10) - Inferência Bayesiana. p. 91
+# https://raw.githubusercontent.com/rbstern/bayesian_inference_book/gh-pages/book.pdf
+
+#############################################################################
+## Código ilustrativo em R para o método da rejeição                       ##
+## B: tamanho da amostra a ser gerada                                      ##
+## pf.avaliar: calcula o valor de uma função proporcional a f.             ##
+## h.avaliar: calcula o valor da densidade h.                              ##
+## h.gerar: gera uma variável aleatória com densidade h.                   ##
+## M: a constante usada no método da rejeição.                             ##
+## ss: parâmetro do set.seed. Padrão NULL, i.e., sem semente fixa.         ##
+## retorna: uma variável aleatória de densidade proporcional a pf.avaliar. ## 
+############################################################################# 
+
+amostrador_rejeicao <- function(B, pf.avaliar, h.avaliar, h.gerar, M){
+  amostra <- vector('list', B) 
+  for(i in 1:B){
+    P <- h.gerar()
+    while(runif(1,0,1) > pf.avaliar(P)/(M*h.avaliar(P))){
+      P <- h.gerar() 
+    }
+    amostra[[i]] <- P
+  }
+  return(amostra) 
+}
+
+####################################################### 
+## retorna: uma variável aleatória de densidade      ##
+## uniforme no círculo de raio 1 e centro na origem. ## 
+####################################################### 
+B <- 1000
+h.gerar <- function() runif(2,-1,1)
+h.avaliar <- function(x) ((x[1]^2 <= 1) & (x[2]^2 <= 1))/4 
+pf.avaliar <- function(x) (x[1]^2 + x[2]^2 <= 1)/pi
+M <- 4/pi
+dados <- amostrador_rejeicao(B, pf.avaliar, h.avaliar, h.gerar, M)
+
+# gráficos
+library(tidyverse)
+names(dados) <- 1:length(dados)
+dados <- as_tibble(t(bind_rows(dados)))
+colnames(dados) <- c('x','y')
+ggplot(dados, aes(x,y)) +
+  geom_point()
 
