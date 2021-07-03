@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2021-06-26      ###
+###      Última atualização: 2021-07-03      ###
 ################################################
 
 # Playlist
@@ -125,8 +125,12 @@ abline(a = 0, b = 1, col = 'red')
 ## Método da rejeição
 
 # 1. Retire uma amostra de um ponto no eixo x da distribuição da proposta.
-# 2. Desenhe uma linha vertical nesta posição x, até o valor y máximo da função de densidade de probabilidade da distribuição da proposta.
-# 3. Faça a amostragem uniformemente ao longo desta linha de 0 ao máximo da função de densidade de probabilidade. Se o valor amostrado for maior que o valor da distribuição desejada nesta linha vertical, rejeite o valor x e volte para a etapa 1; caso contrário, o valor x é uma amostra da distribuição desejada.
+# 2. Desenhe uma linha vertical nesta posição x, até o valor y máximo da função 
+# de densidade de probabilidade da distribuição da proposta.
+# 3. Faça a amostragem uniformemente ao longo desta linha de 0 ao máximo da 
+# função de densidade de probabilidade. Se o valor amostrado for maior que o 
+# valor da distribuição desejada nesta linha vertical, rejeite o valor x e 
+# volte para a etapa 1; caso contrário, o valor x é uma amostra da distribuição desejada.
 
 
 # Adaptado de Esteves, Izbicki & Stern (2020-01-10) - Inferência Bayesiana. p. 91
@@ -139,7 +143,6 @@ abline(a = 0, b = 1, col = 'red')
 ## h.avaliar: calcula o valor da densidade h.                              ##
 ## h.gerar: gera uma variável aleatória com densidade h.                   ##
 ## M: a constante usada no método da rejeição.                             ##
-## ss: parâmetro do set.seed. Padrão NULL, i.e., sem semente fixa.         ##
 ## retorna: uma variável aleatória de densidade proporcional a pf.avaliar. ## 
 ############################################################################# 
 

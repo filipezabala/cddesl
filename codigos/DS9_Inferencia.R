@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2021-06-23      ###
+###      Última atualização: 2021-07-03      ###
 ################################################
 
 # Playlist
@@ -69,7 +69,7 @@ mean(mxc)
 # Intervalos de confiança (frequentistas) assintóticos
 
 # Exemplo 4.27 (IC para \pi)
-n <- 117
+n <- 125
 p <- 25/n
 z <- abs(qnorm(0.025))
 (e <- z*sqrt(p*(1-p)/n))
@@ -79,7 +79,7 @@ z <- abs(qnorm(0.025))
 
 ##
 # Intervalos de confiança (frequentistas) via simulação
-# https://projecteuclid.org/download/pdf_1/euclid.aos/1176344552
+# https://www.jstor.org/stable/2958830
 
 dr <- read.table('http://www.filipezabala.com/data/drinks.txt',
                  header = T)
@@ -98,41 +98,35 @@ cat(mean(x)+z*sd(x)/sqrt(n), mean(x)-z*sd(x)/sqrt(n))
 cat(mean(x)+t*sd(x)/sqrt(n), mean(x)-t*sd(x)/sqrt(n))
 
 # média via simulação (bootstrap)
-mu <- rep(NA, B) # empty vector to store means
+mu <- rep(NA, B) # empty vector to store sample means
 for(i in 1:B){
   mu[i] <- mean(sample(x, size = n, replace=TRUE))
 }
-quantile(mu,c(0.025,0.975))
+quantile(mu, c(0.025,0.975))
 mean(x)
+
+# mediana via simulação
+me <- rep(NA, B) # empty vector to store sample medians
+for (i in 1:B){  
+  me[i] <- median(sample(x, size = n, replace=TRUE))
+}
+quantile(me,c(0.025,0.975))
+median(x)
 
 # variância teoria
 cat((n-1)*var(x)/qchisq(0.975, n-1), 
     (n-1)*var(x)/qchisq(0.025, n-1))
 
-# variância simulação
-v <- rep(NA, B) # empty vector to store medians
+# variância simulação - NÃO FUNCIONA
+v <- rep(NA, B) # empty vector to store sample variances
 for (i in 1:B){  
   v[i] <- var(sample(x, size = n, replace=TRUE))
 }
 quantile(v,c(0.025,0.975))
 var(x)
 
+# Exercício: verificar como seria possível criar ICs para variância e dp via bootstrap.
 # https://math.stackexchange.com/questions/2384639/bootstrap-confidence-interval-in-r-using-replicate-and-quantile?newreg=46ec8b2e55b84b25a3c1c78802c1903c
-B = 10^4;  r = numeric(B)
-for(i in 1:B) {
-  s.re = sd(sample(x,n,repl=T))
-  r[i] = s.re/s }
-L.re = quantile(r, .025);  U.re = quantile(r, .975)
-c(s/U.re, s/L.re)  
-
-
-# mediana via simulação
-me <- rep(NA, nSims) # empty vector to store medians
-for (i in 1:nSims){  
-  me[i] <- median(sample(x, size = n, replace=TRUE))
-}
-quantile(me,c(0.025,0.975))
-median(x)
 
 
 # Abordagem bayesiana
