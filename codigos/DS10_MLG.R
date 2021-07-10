@@ -3,7 +3,7 @@
 ###         http://filipezabala.com          ###
 ###  https://github.com/filipezabala/cddesl  ###
 ###            Início: 2020-10-11            ###
-###      Última atualização: 2021-06-23      ###
+###      Última atualização: 2021-07-10      ###
 ################################################
 
 # Playlist
@@ -67,16 +67,14 @@
 # Lendo dados
 x <- read.table('http://www.filipezabala.com/data/drinks.txt', header = T)
 head(x)
-attach(x)
-temp
 
 # Descritivas
 summary(x)
 
 # Correlacao
-cor(temp,gar)
-plot(temp,gar)
-cor.test(temp,gar)
+plot(x$temp, x$gar)
+cor(x$temp, x$gar) # (coeficiente de) correlação (amostral) (de Pearson)
+cor.test(x$temp, x$gar)
 
 # Diagnostico
 d <- function(modelo){
@@ -87,14 +85,16 @@ d <- function(modelo){
 
 # Modelos
 # linear
-fit <- lm(gar ~ temp)
+fit <- lm(gar ~ temp, data = x)
 d(fit)
+model.matrix(fit)
 
 # linear sem intercepto
-fit1 <- lm(gar ~ temp - 1)   # '+0' tb funciona
+fit1 <- lm(gar ~ temp - 1, data = x)   # '+0' tb funciona
 d(fit1)
+model.matrix(fit1)
 
-# quadratico incompleto
+ # quadratico incompleto
 fit2 <- lm(gar ~ I(temp^2))  # veja ?I e ?formula
 d(fit2)
 
@@ -137,8 +137,7 @@ predict(fit4, newdata, interval='predict')
 # https://books.google.com.br/books?hl=en&lr=&id=v-walRnRxWQC&oi=fnd&pg=PR11&dq=Altman+(1991)+-+Practical+Statistics+for+Medical+Research&ots=SxYVFfuo1f&sig=eU6mb7FCjnexAzfzhdS4YVR6StU#v=onepage&q=o'neill&f=false
 
 # lendo dados
-setwd('~/Dropbox/PUC/Extensão/2018-11 - ICDR1/dados/')
-cystfibr <- read.table('cystfibr.txt', head = T)
+cystfibr <- read.table('http://www.filipezabala.com/data/cystfibr.dat', header = T)
 summary(cystfibr)
 
 # matriz de dispesao
@@ -147,7 +146,7 @@ pairs(cystfibr, gap=0, cex.labels=0.9)
 # modelo saturado
 fit <- lm(Pemax ~., data = cystfibr)
 summary(fit)
-par(mfrow=c(2,2));plot(fit, which = 1:4)
+par(mfrow=c(2,2)); plot(fit, which = 1:4)
 step(fit, trace=2)
 
 # modelo sugerido por step()
@@ -171,6 +170,36 @@ predict(fit3, newdata1, interval='predict')
 predict(fit3, newdata2, interval='predict')
 
 
+# Exemplo 7.3
+# http://filipezabala.com/enrs/modelos-lineares.html#regressão-linear-múltipla
+
+library(readxl)
+url1 <- 'http://archive.ics.uci.edu/ml/machine-learning-databases/00242/ENB2012_data.xlsx'
+download.file(url1, 'temp.xlsx', mode = 'wb')
+energy <- read_excel('temp.xlsx')
+str(energy)   # dando uma olhada nas variáveis
+
+# análise exploratória
+pairs(energy)
+summary(energy)
+
+# modelo saturado
+fit <- lm(Y1 ~ ., data = energy[,-10])
+summary(fit)
+
+# stepwise
+fit2 <- step(fit) # AIC (menor melhor)
+summary(fit2)
+d(fit2)
+
+# possível ponto infuente 
+fit3 <- lm(Y1 ~ X1 + X2 + X3 + X5 + X7 + X8, data = energy[-22,])
+summary(fit3)
+d(fit3)
+
+?locate
+
+
 ###
 ## Regressão logística bivariada
 # https://mathdept.iut.ac.ir/sites/mathdept.iut.ac.ir/files/AGRESTI.PDF
@@ -181,7 +210,7 @@ library(tidyverse)
 
 n <- 20
 (y <- c(rep(0,n), rep(1,n)))
-set.seed(1); (x1 <- c(rbinom(n,1,.1),rbinom(n,1,.9)))
+set.seed(1); (x1 <- c(rbinom(n,1,.2),rbinom(n,1,.9)))
 set.seed(1); (x2 <- rbinom(2*n,1,.5))
 x1 <- as.factor(x1)
 x2 <- as.factor(x2)
@@ -195,28 +224,34 @@ by(y,x2,table) %>%
 # modelo 1
 fit1 <- glm(y ~ x1, family = 'binomial')
 summary(fit1)
+(b0 <- fit1$coef[1])
+(b1 <- fit1$coef[2])
+
 # x1=0
-exp(coef(fit1)[1])/(1+exp(coef(fit1)[1]))
-exp(sum(coef(fit1)))/(1+exp(sum(coef(fit1))))
+# π(0) = Pr(Y=1|X1=0)
+exp(b0+b1*0)/(1+exp(b0+b1*0))
+
+# x1=1
+# π(1) = Pr(Y=1|X1=1)
+exp(b0+b1*1)/(1+exp(b0+b1*1))
+
+
 
 # modelo 2
 fit2 <- glm(y ~ x2, family = 'binomial')
 summary(fit2)
-# x1=0
-exp(coef(fit1)[1])/(1+exp(coef(fit1)[1]))
-exp(sum(coef(fit1)))/(1+exp(sum(coef(fit1))))
 
 
 ###
 ## Modelo Poisson
 #
 
-x <- read.table('http://www.estatisticaclassica.com/data/fraturas.dat',
+x <- read.table('http://www.filipezabala.com/data/fraturas.dat',
                 header = TRUE)
 colnames(x) <- c('numeroFraturas', 'menorDistancia', 'extracaoCarvao',
                  'alturaFendaInf','tempoOpera')
 summary(x)
-attach(x)
+
 par(mfrow=c(1,1))
 boxplot(x)
 pairs(x)
@@ -248,3 +283,4 @@ newdata2 <- with(x,
                             extracaoCarvao = 50,
                             tempoOpera = 35))
 predict(fit1, newdata2, type='response')
+
